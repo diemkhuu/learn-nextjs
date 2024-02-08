@@ -29,6 +29,9 @@ export default function Home() {
         <Link className="block" href="/about" title="go to about page">
           Go to About
         </Link>
+        <Link className="block" href="/posts" title="go to post list page">
+          Go to Post list
+        </Link>
       </div>
 
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
