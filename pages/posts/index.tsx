@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPropsContext } from "next";
+import Link from "next/link";
 import * as React from "react";
 
 interface IPostPayload {
@@ -23,9 +24,9 @@ interface PostListPageProps {
 export const getStaticProps: GetStaticProps<PostListPageProps> = async (context: GetStaticPropsContext) => {
   // server side
   // build time
-  const response = await fetch("https://6580118d6ae0629a3f544205.mockapi.io/v1/posts?limit=10");
+  const response = await fetch("https://6580118d6ae0629a3f544205.mockapi.io/v1/posts?page=1&limit=10");
   const data = await response.json();
-  console.log({ data });
+  // console.log({ data });
   const posts = data.map((p: IPostPayload) => ({ title: p.title, id: p.id }));
 
   return {
@@ -40,9 +41,13 @@ export default function PostList(props: PostListPageProps) {
   return (
     <>
       <h1>POST LIST</h1>
-      {posts.map((post) => (
-        <p>{post.title}</p>
-      ))}
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>
+            <Link href={`/posts/${post.id}`}>{post.title}</Link>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
